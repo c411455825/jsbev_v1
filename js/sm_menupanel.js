@@ -96,9 +96,15 @@
                         .appendTo(li);
                     li_div = $("<div style=\"position: absolute;left: 0px;top:46px;\"></div>")
                         .appendTo(li);
+
                     if (para.menu) {
-                        para.menu.menuBody.appendTo(li_div)
-                            .css("display", "none");
+                        if(para.menu.menuBody){
+                            para.menu.menuBody.appendTo(li_div)
+                                .css("display", "none");
+                        }
+                        else if(para.menu.appendTo){
+                            para.menu.appendTo(li_div).css("display", "none");
+                        }
                     }
 
                     li.appendTo(ul);
@@ -135,7 +141,14 @@
                         return function () {
                             if (!me.canelTimeout(timeoutId)) {
                                 me.hideAllMenu();
-                                menu && menu.menuBody.css("display", "block");
+                                if(menu){
+                                    if(menu.menuBody){
+                                        menu.menuBody.css("display", "block");
+                                    }
+                                    else{
+                                        menu.css("display", "block");
+                                    }
+                                }
                             }
                         }
                     }(timeoutId, menu))
@@ -151,7 +164,12 @@
 
                     this.addHoverCss([li_a, li, li_a.children()], li);
 
-                    menuItms = menu.getItems();
+                    if(menu.getItems){
+                        menuItms = menu.getItems();
+                    }
+                    else{
+                        menuItms = [menu];
+                    }
 
                     for (var j = 0; j < menuItms.length; j++) {
                         menuItm = menuItms[j];
@@ -174,7 +192,15 @@
                 function mouseout(timeoutId, menu, li) {
                     me.createTimeout(timeoutId, function (timeoutId, menu, li) {
                         return function () {
-                            menu && menu.menuBody.css("display", "none");
+                            if(menu){
+                                if(menu.menuBody){
+                                    menu.menuBody.css("display", "none");
+                                }
+                                else{
+                                    menu.css("display", "none");
+                                }
+                            }
+                            //menu && menu.menuBody.css("display", "none");
                             li.removeClass("ui-state-hover");
                         }
                     }(timeoutId, menu, li));
@@ -216,7 +242,15 @@
                 var tbs = this.tab_array, menu;
                 for (var i = 0; i < tbs.length; i++) {
                     menu = tbs[i].menu;
-                    if (menu)menu.menuBody.css("display", "none");
+                    if(menu){
+                        if(menu.menuBody){
+                            menu.menuBody.css("display", "none");
+                        }
+                        else{
+                            menu.css("display", "none");
+                        }
+                    }
+                    //if (menu)menu.menuBody.css("display", "none");
                 }
             }
         },
