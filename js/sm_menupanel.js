@@ -16,20 +16,32 @@
              *         {
              *              "icon":"className",
              *              "title":"标题",
-             *              "menu":new SuperMap.Bev.Menu()
+             *              "menu":new SuperMap.Bev.Menu()//$("<div>").html("this is a div")
              *          }
              *      ]
              * },
              * (end)
              */
             "config":null,
-            "tabBody":null,
             /**
              * APIProperty: body
              * {HTMLElement} 父容器
              */
             "body":null,
+            /**
+             * Property: tabBody
+             * {HTMLElement} tab按钮dom对象
+             */
+            "tabBody":null,
+            /**
+             * Property: tab_array
+             * {Array<Object>} 存储每个tab按钮相关信息的数组
+             */
             "tab_array":[],
+            /**
+             * Property: tabTimeout
+             * {Object} 控制菜单延时显示隐藏
+             */
             "tabTimeout":{},
             /**
              * Constructor: SuperMap.Bev.MenuPanel
@@ -46,7 +58,7 @@
              *          {
              *              "icon":"measure_icon",
              *              "title":"基本操作",
-             *              "menu":new SuperMap.Bev.Menu()
+             *              "menu":new SuperMap.Bev.Menu()//$("<div>").html("this is a div")
              *          }
              *      ]
              *  })
@@ -68,7 +80,7 @@
                 this.bindEvents();
             },
             /**
-             * APIMethod: createTab
+             * Method: createTab
              * 创建该控件的dom对象。
              */
             "createTab":function () {
@@ -125,7 +137,7 @@
                 return tab;
             },
             /**
-             * APIMethod: bindEvents
+             * Method: bindEvents
              * 绑定事件。
              */
             "bindEvents":function () {
@@ -206,6 +218,10 @@
                     }(timeoutId, menu, li));
                 }
             },
+            /**
+             * Method: addHoverCss
+             * 当时鼠标放到tab上时，改变tab的样式。
+             */
             addHoverCss:function (doms, li) {
                 for (var i = 0; i < doms.length; i++) {
                     doms[i].mouseout(function () {
@@ -213,6 +229,10 @@
                     })
                 }
             },
+            /**
+             * Method: canelTimeout
+             * 注销延时。
+             */
             canelTimeout:function (name) {
                 if (this.tabTimeout[name]) {
                     window.clearTimeout(this.tabTimeout[name]);
@@ -223,6 +243,10 @@
                     return false;
                 }
             },
+            /**
+             * Method: createTimeout
+             * 创建延时，显示隐藏菜单和改变tab样式都会有延时。
+             */
             createTimeout:function (name, callback) {
                 var me = this;
                 this.tabTimeout[name] = window.setTimeout(function (cb, name) {
@@ -235,8 +259,8 @@
                 }(callback, name), 300);
             },
             /**
-             * APIMethod: hideAllMenu
-             * 隐藏打开的所有菜单。
+             * Method: hideAllMenu
+             * 隐藏所有菜单。
              */
             hideAllMenu:function () {
                 var tbs = this.tab_array, menu;

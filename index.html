@@ -4,7 +4,7 @@
 	<title>supermap</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="./js/SuperMap.Include.js"></script>
+    <script src="./js/SuperMap.Include.js"></script><!--引入SuperMap iClient For JavaScript类库-->
 	 <script src="./js/jquery-1.8.2.js"></script>
     <script src="./js/demo1/sm_bev_main.js"></script>                    <!--引入bev入口脚本-->
     <script>
@@ -16,8 +16,10 @@
 
                 //设置主题
                 SuperMap.Bev.Theme.set("dot-luv");
+                //创建框架中的一些元素，如菜单
                 initDemo();
 
+                //初始化地图
                 panZoomBar = new SuperMap.Control.PanZoomBar();
                 myNavigation = new SuperMap.Control.Navigation({ dragPanOptions: { enableKinetic: true } });
                 map = new SuperMap.Map('mapContainer',{ controls: [ new SuperMap.Control.ScaleLine(),
@@ -30,62 +32,40 @@
             });
         }
         function initDemo(){
+            //WidgetControl控件，改控件用于控制窗口的位置以及一些ui交互
             myWidgetControl = new SuperMap.Bev.WidgetControl("#widgetControl");
-
+            //创建菜单按钮栏，当鼠标移到这些按钮上时，会显示菜单或其他操作面板
             myMenuPanel = new SuperMap.Bev.MenuPanel($("#toolbar"),{
                 "tree":[
                     {
                         "icon":"measure_icon",
                         "title":"基本操作",
-                        "menu":$("<div>").html("this is a test div").css({
-                            "background":"#fff",
-                            "border":"1px solid #333",
-                            "color":"#333"
-                        })
-//                        "menu":new SuperMap.Bev.Menu(null,{
-//                            "tree":[
-//                                {
-//                                    "icon":"measure_16_16",
-//                                    "text":"量&nbsp;&nbsp;&nbsp;&nbsp;算",
-//                                    "events":{
-//                                        "click":function(){
-//                                            if(!myMeasure){
-//                                                var dialog = new SuperMap.Bev.Dialog(myWidgetControl,null,{
-//                                                    "icon":"measure_16_16",
-//                                                    "text":"量&nbsp;&nbsp;&nbsp;&nbsp;算"
-//                                                });
-//
-//                                                var contentBody = dialog.getContentBody();
-//                                                myMeasure = new SuperMap.Bev.Measure(contentBody,map);
-//                                                dialog.on("dialogclose",function(){
-//                                                    if(myMeasure){
-//                                                        myMeasure.destroy();
-//                                                        myMeasure = null;
-//                                                    }
-//                                                })
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            ]
-//                        })
-                    },
-                    {
-                        "icon":"measure_icon",
-                        "title":"基本操作1",
-                        "menu":$("<div>").html("this is a test div1").css({
-                            "background":"#fff",
-                            "border":"1px solid #333",
-                            "color":"#333"
-                        })
-                    },
-                    {
-                        "icon":"measure_icon",
-                        "title":"基本操作2",
-                        "menu":$("<div>").html("this is a test div2").css({
-                            "background":"#fff",
-                            "border":"1px solid #333",
-                            "color":"#333"
+                        "menu":new SuperMap.Bev.Menu(null,{        //页头菜单对象
+                            "tree":[
+                                {
+                                    "icon":"measure_16_16",
+                                    "text":"量&nbsp;&nbsp;&nbsp;&nbsp;算",
+                                    "events":{//点击菜单中的一栏，创建一个量算功能面板
+                                        "click":function(){
+                                            if(!myMeasure){
+                                                var dialog = new SuperMap.Bev.Dialog(myWidgetControl,null,{
+                                                    "icon":"measure_16_16",
+                                                    "text":"量&nbsp;&nbsp;&nbsp;&nbsp;算"
+                                                });
+
+                                                var contentBody = dialog.getContentBody();
+                                                myMeasure = new SuperMap.Bev.Measure(contentBody,map);
+                                                dialog.on("dialogclose",function(){
+                                                    if(myMeasure){
+                                                        myMeasure.destroy();
+                                                        myMeasure = null;
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
                         })
                     }
                 ]
@@ -95,8 +75,8 @@
 </head>
 <body onload="init()">
 <!--[if IE 7]><div style="position: absolute;width: 100%;height: 100%;overflow: hidden;"><![endif]-->
-        <div id="mapContainer"></div>
-        <div id="head" class="background_1">
+        <div id="mapContainer"></div><!--地图区域-->
+        <div id="head" class="background_1"><!--标题栏-->
             <span id="logo" class="head_child"></span>
             <span id="toolbar" class="head_child"></span>
         </div>

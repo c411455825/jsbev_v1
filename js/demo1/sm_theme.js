@@ -1,6 +1,6 @@
 ﻿/**
  * Class: SuperMap.Bev.Theme
- * 主题类。
+ * 主题类,设置框架的主题。
  *(code)
  * SuperMap.Bev.Theme.set("dot-luv");
  * (end)
