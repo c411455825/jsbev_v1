@@ -56,6 +56,9 @@
             /**
              * APIMethod: show
              * 显示提示信息
+             *
+             * Parameters:
+             * txt - {String} 要提示的内容
              */
             show:function(txt){
                 this.create(txt);
@@ -76,8 +79,11 @@
                 }
             },
             /**
-             * APIMethod: create
+             * Method: create
              * 创建该控件的dom对象。
+             *
+             * Parameters:
+             * txt - {String} 要提示的内容
              */
             create:function(txt){
                 var a,b = this.body,c = this.config, t,me = this;
@@ -123,8 +129,11 @@
                 }
             },
             /**
-             * APIMethod: position
+             * Method: position
              * 定位控件对象。
+             *
+             * Parameters:
+             * dom - {HTMLElement} 该控件的dom对象
              */
             position:function(dom){
                 var b=this.body,size,c = this.config, p,s={};
@@ -156,7 +165,7 @@
                 dom.css(s);
             },
             /**
-             * APIMethod: getCenter
+             * Method: getCenter
              * 计算中心点。
              */
             getCenter:function(fLength,cLength){

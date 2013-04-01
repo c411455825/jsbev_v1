@@ -1,5 +1,19 @@
-﻿(function(){
+﻿/**
+ * Class: SuperMap.Bev.Class
+ * class类,实现面向对象。
+ */
+(function(){
     function A(){}
+    /**
+     * Method: register
+     * 注册一个类。
+     *
+     * Parameters:
+     * className - {String} 类的名称
+     * classObj - {Object} 类对象，包括一些属性和方法
+     * extend - {String} 父类的名称
+     * isStatic - {Boolean} 是否是静态类
+     */
     A.register = function(className,classObj,extend,isStatic){
         var names,space = window,name,lastName;
 
@@ -26,6 +40,17 @@
 //    A.requires = function(paths,callback){
 //
 //    }
+    /**
+     * Method: create
+     * 创建一个类。
+     *
+     * Parameters:
+     * className - {String} 类的名称
+     * object - {Object} 类对象，包括一些属性和方法
+     * extend - {String} 父类的名称
+     * isTtatic - {Boolean} 是否是静态类
+     * depend - {Array<String>} 初始化该类前需要加载的依赖脚本
+     */
     A.create = function(className,object,extend,isTtatic,depend){
         var me=this;
         if(depend&&depend.length>0){

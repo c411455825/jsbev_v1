@@ -1,4 +1,6 @@
-﻿function clears(id) {
+﻿//该文件的代码主要用于生成页面
+
+function clears(id) {
     document.getElementById(id).value = "";
 }
 

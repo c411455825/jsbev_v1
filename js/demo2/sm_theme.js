@@ -7,16 +7,23 @@
  */
 (function(){
     function A(){
-        this.themes = {//[background_color,background_image,border_color,widgetControlBorder]
-            "base":["#3BAAE3","ui-bg_highlight-soft_75_cccccc_1x100","#AAA"],
-            "cupertino":["","","#AED0EA"],
-            "start":["#3BAAE3","ui-bg_glass_50_3baae3_1x400","#2694E8"]
-        }
+//        this.themes = {//[background_color,background_image,border_color,widgetControlBorder]
+//            "base":["#3BAAE3","ui-bg_highlight-soft_75_cccccc_1x100","#AAA"],
+//            "cupertino":["","","#AED0EA"],
+//            "start":["#3BAAE3","ui-bg_glass_50_3baae3_1x400","#2694E8"]
+//        }
         this.init();
     }
     var B = A.prototype;
     B.init = function(){
     }
+    /**
+     * Method: setFontColor
+     * 对几个个别的主题的文字颜色做处理
+     *
+     * Parameters:
+     * theme - {String} 主题名称
+     */
     B.setFontColor = function(theme){
         var themesArr = "south-street,black-tie,eggplant,excite-bike,flick,pepper-grinder,vader";
 
@@ -32,10 +39,14 @@
             this.createStyle(cssTxt);
         }
     }
+    /**
+     * Method: setStyle
+     * 对一些样式做特别处理
+     */
     B.setStyle = function(theme){
-        var cssTxt,cssArr,borderCss;
+        var cssTxt,borderCss;
 
-        cssArr = this.themes[theme];
+        //cssArr = this.themes[theme];
         $("#head").addClass("ui-widget-header").css({
             "opacity":0.9,
             "filter":"alpha(opacity=90)",
@@ -76,11 +87,18 @@
             })
         }catch(e){}
         borderCss = $(".ui-widget-header").css("border");
-        cssTxt = ".widgetControl {" +
-            "border: " + borderCss +
-            "}";
+//        cssTxt = ".widgetControl {" +
+//            "border: " + borderCss +
+//            "}";
         //this.createStyle(cssTxt);
     }
+    /**
+     * APIMethod: createStyle
+     * 动态创建css样式
+     *
+     * Parameters:
+     * css - {String} css样式
+     */
     B.createStyle = function(css){
         if(document.all){
             window.style=css;
@@ -105,6 +123,13 @@
 //        }
 //        return null;
 //    }
+    /**
+     * APIMethod: set
+     * 设置主题
+     *
+     * Parameters:
+     * themeName - {String} 主题名称
+     */
     B.set = function(themeName){
         var path,me = this;
         path = ["theme/bevThemes/" + themeName + "/jquery.ui.all.css"];

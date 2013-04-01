@@ -18,13 +18,13 @@
             map:null,
 
             /**
-             * APIProperty: geoMarker_bev
+             * Property: geoMarker_bev
              * {SuperMap.Layer.Markers} 定位图标图层
              */
             geoMarker_bev:new SuperMap.Layer.Markers("geoMarker_bev"),
 
             /**
-             * APIProperty: geolocateControl
+             * Property: geolocateControl
              * {Object} 地理定位控件
              */
             geolocateControl:null,
@@ -55,7 +55,7 @@
             },
 
             /**
-             * APIMethod: create
+             * Method: create
              * 创建该控件的dom对象。
              */
             create:function () {
@@ -88,7 +88,7 @@
             },
 
             /**
-             * APIMethod: createControl
+             * Method: createControl
              * 创建定位控件。
              */
             createControl:function () {
@@ -107,7 +107,7 @@
             },
 
             /**
-             * APIMethod: getGeolocationCompleted
+             * Method: getGeolocationCompleted
              * 定位完成执行操作。
              */
             getGeolocationCompleted:function (event) {
@@ -120,7 +120,7 @@
             },
 
             /**
-             * APIMethod: getGeolocationFailed
+             * Method: getGeolocationFailed
              * 定位失败执行操作。
              */
             getGeolocationFailed:function (e) {

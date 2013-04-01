@@ -18,13 +18,13 @@
             map:null,
 
             /**
-             * APIProperty: geoMarker_bev
-             * {SuperMap.Layer.Markers} 矢量要素图层
+             * Property: geoMarker_bev
+             * {SuperMap.Layer.Vector} 矢量要素图层
              */
             drFeVector_bev:new SuperMap.Layer.Vector("drFeVector_bev"),
 
             /**
-             * APIProperty: geolocateControl
+             * Property: geolocateControl
              * {Object} 要素绘制控件
              */
             drawFeatureControls:null,
@@ -62,7 +62,7 @@
             },
 
             /**
-             * APIMethod: create
+             * Method: create
              * 创建该控件的dom对象。
              */
             create:function () {
@@ -102,7 +102,7 @@
             },
 
             /**
-             * APIMethod: createControl
+             * Method: createControl
              * 创建绘制控件。
              */
             createControl:function () {
@@ -119,7 +119,7 @@
             },
 
             /**
-             * APIMethod: drawFeature
+             * Method: drawFeature
              * 激活绘制要素控件。
              */
             drawFeature:function (e) {
@@ -136,7 +136,7 @@
             },
 
             /**
-             * APIMethod: featureAdded
+             * Method: featureAdded
              * 要素添加后取消控件激活。
              */
             featureAdded:function () {

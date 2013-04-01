@@ -1,14 +1,26 @@
 ﻿/**
- * Class: SuperMap.Bev.Menu
- * 图标按钮。
+ * Class: SuperMap.Bev.DemoUtil
+ * 工具类(供模板二使用)。
  */
 (function () {
     SuperMap.Bev.Class.create(
         "SuperMap.Bev.DemoUtil",
         {
+            /**
+             * Property: isLeftHide
+             * {Boolean} 左侧区域是否隐藏
+             */
             isLeftHide:false,
             init:function () {
             },
+            /**
+             * Method: toolBarHideBtn
+             * 创建一个按钮，该按钮用于隐藏左侧工具面板。
+             *
+             * Parameters:
+             * leftDiv - {HTMLElement}  左侧父容器
+             * rightDiv - {HTMLElement}  右侧父容器
+             */
             toolBarHideBtn:function(leftDiv,rightDiv){
                 var a, b, h, t,me=this;
 

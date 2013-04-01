@@ -171,6 +171,9 @@ LazyLoad=function(k){function p(b,a){var g=k.createElement(b),c;for(c in a)a.has
     /**
      * Method: init
      * init方法，加载一些初始化文件。
+     *
+     * Parameters:
+     * callback - {Function} 回调方法
      */
     B.init = function(callback){
         var me = this;
@@ -186,6 +189,9 @@ LazyLoad=function(k){function p(b,a){var g=k.createElement(b),c;for(c in a)a.has
     /**
      * Method: loadInitCss
      * 加载初始化的css文件
+     *
+     * Parameters:
+     * cb - {Function} 回调方法
      */
     B.loadInitCss = function(cb){
         this.load("css",this.initCss,cb,null);
@@ -193,6 +199,9 @@ LazyLoad=function(k){function p(b,a){var g=k.createElement(b),c;for(c in a)a.has
     /**
      * Method: loadInitJs
      * 加载初始化的js文件
+     *
+     * Parameters:
+     * cb - {Function} 回调方法
      */
     B.loadInitJs = function(cb){
         this.load("js",this.initJS,cb,null);

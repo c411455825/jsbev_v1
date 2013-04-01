@@ -1,6 +1,6 @@
 ﻿/**
  * Class: SuperMap.Bev.WidgetControl
- *窗口管理控件。
+ *窗口管理控件(仅供模板一使用)。
  */
 (function () {
     SuperMap.Bev.Class.create(
@@ -13,17 +13,45 @@
             body:null,
             body_r:null,
             body_l:null,
+            /**
+             * Property: widgetsContainer
+             * {HTMLElement} 放置widgets的容器
+             */
             widgetsContainer:null,
+            /**
+             * Property: widgetsArray
+             * {Array<Object>} 放置widgets的数组
+             */
             widgetsArray:[],
+            /**
+             * Property: isHide
+             * {Boolean} widgets是否隐藏
+             */
             isHide:false,
             /**
              * APIProperty: top
              * {Number} 控件的上偏移量
              */
             top:60,
+            /**
+             * Property: hideWidgetsBtn
+             * {HTMLElement} 按钮，用于控制widgets是否显示
+             */
             hideWidgetsBtn:null,
+            /**
+             * Property: scorllTopBtn
+             * {HTMLElement} 按钮，用于上翻widgets列表
+             */
             scorllTopBtn:null,
+            /**
+             * Property: scorllBottomBtn
+             * {HTMLElement} 按钮，用于下翻widgets列表
+             */
             scorllBottomBtn:null,
+            /**
+             * Property: isIe7
+             * {Boolean} 当前浏览器是否是ie7
+             */
             isIe7:false,
             /**
              * Constructor: SuperMap.Bev.WidgetControl
@@ -152,7 +180,15 @@
                     me.disableHideWidgetsBtn();
                 }, 300)
                 return widget;
-
+                /**
+                 * Method: addtionbtn_clic_out
+                 * 从widget列表中移除一个widget。
+                 *
+                 * Parameters:
+                 * widget {<SuperMap.Bev.Dialog>}  要移除的widget对象
+                 * btn {HTMLElement} 移除按钮
+                 * widget_container {HTMLElement} 放置widget列表的容器
+                 */
                 function addtionbtn_clic_out(widget, btn, widget_container) {
                     me.reduceWidget(widget_container, 1, function (widget, btn, widget_container) {
                         return function () {
@@ -179,7 +215,14 @@
                         }
                     }(widget, btn, widget_container));
                 }
-
+                /**
+                 * Method: addtionbtn_clic_in
+                 * 往widget列表中加入一个widget。
+                 *
+                 * Parameters:
+                 * widget {<SuperMap.Bev.Dialog>}  要加入的widget对象
+                 * btn {HTMLElement} 按钮
+                 */
                 function addtionbtn_clic_in(widget, btn) {
                     var widget_container = me.createWidgetContainer(me.widgetsContainer);
                     widget.dialog(me.concatOption(option_default, {
@@ -212,7 +255,14 @@
                         me.disableHideWidgetsBtn();
                     }, 300);
                 }
-
+                /**
+                 * Method: minimizeWidget
+                 * 将widget最小化。
+                 *
+                 * Parameters:
+                 * target {<SuperMap.Bev.Dialog>}  widget对象
+                 * btn {HTMLElement} 按钮
+                 */
                 function minimizeWidget(target, btn) {
                     me.reduceWidget(target, 30, function (btn) {
                         return function (oldHeight) {
@@ -229,7 +279,15 @@
                         }
                     }(btn))
                 }
-
+                /**
+                 * Method: restoreWidget
+                 * 将widget从最小化状态还原。
+                 *
+                 * Parameters:
+                 * target {<SuperMap.Bev.Dialog>}  widget对象
+                 * btn {HTMLElement} 按钮
+                 * oldHeight {String} widget原先的高度
+                 */
                 function restoreWidget(target, btn, oldHeight) {
                     me.reduceWidget(target, oldHeight, function (btn) {
                         return function () {
@@ -247,6 +305,10 @@
                     }(btn))
                 }
             },
+            /**
+             * Method: modifyWidgetsHeight
+             * 随着widget的增减，修改其容器的高度，已经做一些其他处理。
+             */
             modifyWidgetsHeight:function () {
                 var allHeight, widgetsHeight, top, bufferHeight, widgetsTop, wsc = this.widgetsContainer;
 
@@ -276,6 +338,15 @@
                     return false;
                 }
             },
+            /**
+             * Method: reduceWidget
+             * 减小widget的高度。
+             *
+             * Parameters:
+             * target {<SuperMap.Bev.Dialog>}  widget对象
+             * height {Number} 高度值
+             * callback {Function} 高度减小完成后的回调函数
+             */
             reduceWidget:function (target, height, callback) {
                 var h = Math.floor(target.height());
                 target.css({
@@ -296,6 +367,14 @@
                     }
                 }(target, height, callback, h), 300)
             },
+            /**
+             * Method: pushWidget
+             * 将widget加入列表。
+             *
+             * Parameters:
+             * widget_container {HTMLElement}  widget容器
+             * widget {SuperMap.Bev.Dialog} widget对象
+             */
             pushWidget:function (widget_container, widget) {
                 var obj = {
                     "widget":widget,
@@ -304,6 +383,13 @@
                 this.widgetsArray.push(obj);
                 widget.sm_index = this.widgetsArray.length - 1;
             },
+            /**
+             * Method: removeWidget
+             * 删除widget。
+             *
+             * Parameters:
+             * index {Number}  widget在列表中的索引值
+             */
             removeWidget:function (index) {
                 var wa = this.widgetsArray;
                 var obj = wa.splice(index, 1);
@@ -313,12 +399,27 @@
                     obj.widget.sm_index = i;
                 }
             },
+            /**
+             * Method: concatOption
+             * 克隆参数。
+             *
+             * Parameters:
+             * source {Object}  源参数对象
+             * target {Object}  目标参数对象
+             */
             concatOption:function (source, target) {
                 for (var key in target) {
                     source[key] = target[key];
                 }
                 return source;
             },
+            /**
+             * Method: createWidgetContainer
+             * 创建widget列表容器。
+             *
+             * Parameters:
+             * con {HTMLElement}  父容器
+             */
             createWidgetContainer:function (con) {
                 var html = "<div class=\"widget_container\"></div>";
                 var widget_container = $(html);
@@ -326,6 +427,13 @@
 
                 return widget_container;
             },
+            /**
+             * Method: createbtn
+             * 创建一个按钮。
+             *
+             * Parameters:
+             * con {HTMLElement}  父容器
+             */
             createbtn:function (con) {
                 var btn1, btn2, btn3, me = this;
                 this.hideWidgetsBtn = btn1 = $("<button class=\"widgetControl_btn\">&nbsp;</button>")
@@ -383,6 +491,13 @@
                 }(this));
                 this.removeCss([btn1, btn2, btn3]);
             },
+            /**
+             * Method: removeCss
+             * mouseover/mouseout按钮状态变化。
+             *
+             * Parameters:
+             * doms {HTMLElement}  按钮
+             */
             removeCss:function (doms) {
                 for (var i = 0; i < doms.length; i++) {
                     doms[i].mouseout(function () {
@@ -390,6 +505,11 @@
                     })
                 }
             },
+            /**
+             * Method: disableScorllWidgetBtn
+             * 当放置在列表中的widget不足够多时，使得上下翻widget列表的按钮失效
+             *
+             */
             disableScorllWidgetBtn:function () {
                 var widgetList, height, top, allHeight;
 
@@ -412,6 +532,10 @@
                     this.scorllBottomBtn.button("option", "disabled", false);
                 }
             },
+            /**
+             * Method: disableHideWidgetsBtn
+             * 当列表中没有widget时，使得隐藏列表的按钮失效
+             */
             disableHideWidgetsBtn:function () {
                 var btn = this.hideWidgetsBtn;
                 if (this.widgetsArray.length == 0) {
@@ -423,6 +547,15 @@
                     return false;
                 }
             },
+            /**
+             * Method: moveWidgets
+             * 移动widget列表
+             *
+             * Parameters:
+             * direction {String}  移动方向,bottom or top
+             * isAdd {Boolean} 是否因为新加入widget而移动
+             * callback {Function} 移动完毕后的回调函数
+             */
             moveWidgets:function (direction, isAdd, callback) {
                 var h1, h2, h3, h4, h7, offsetY, showWidget, tw, wa = this.widgetsArray, wh, wsc = this.widgetsContainer, wt,
                     me = this;
@@ -489,6 +622,13 @@
                     }(callback));
                 }
             },
+            /**
+             * Method: hideOrShowWidgets
+             * 隐藏或显示widgets列表
+             *
+             * Parameters:
+             * callback {Function} 移动完毕后的回调函数
+             */
             hideOrShowWidgets:function (callback) {
                 var offsetX, me = this, isIe7, br;
 
@@ -500,6 +640,7 @@
                     //isIe7&&me.body_l.css("overflow-x","hidden");
                     offsetX = 405;
                 }
+
                 this.move(offsetX, null, this.widgetsContainer, function (cb, isIe7) {
                     return function () {
                         me.isHide = !me.isHide;
@@ -508,6 +649,16 @@
                     }
                 }(callback, isIe7))
             },
+            /**
+             * Method: move
+             * 移动对象
+             *
+             * Parameters:
+             * offsetX {Number} 水平偏移量
+             * offsetY {Number} 垂直偏移量
+             * target {HTMLElement} 待移动的dom元素
+             * callback {Function} 移动完后的回调方法
+             */
             move:function (offsetX, offsetY, target, callback) {
                 var p, y, s = {}, x;
 

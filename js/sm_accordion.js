@@ -64,7 +64,7 @@
                 this.create();
             },
             /**
-             * APIMethod: create
+             * Method: create
              * 创建该控件的dom对象。
              */
             create:function(){

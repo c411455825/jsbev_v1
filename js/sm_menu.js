@@ -85,7 +85,7 @@
                 this.bindEvents();
             },
             /**
-             * APIMethod: createMenu
+             * Method: createMenu
              * 创建该控件的dom对象。
              */
             createMenu:function () {
@@ -126,7 +126,7 @@
                 return ul;
             },
             /**
-             * APIMethod: bindEvents
+             * Method: bindEvents
              * 绑定事件。
              */
             bindEvents:function () {
@@ -160,7 +160,7 @@
                 }
             },
             /**
-             * APIMethod: getItems
+             * Method: getItems
              * 获取菜单中的栏目组成的数组。
              *
              * Returns:

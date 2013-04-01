@@ -22,7 +22,7 @@
              */
             resultDiv:null,
             /**
-             * APIProperty: measureControls
+             * Property: measureControls
              * {Object} 量算控件
              */
             measureControls:null,
@@ -47,7 +47,7 @@
                 this.createControl();
             },
             /**
-             * APIMethod: create
+             * Method: create
              * 创建该控件的dom对象。
              */
             create:function () {
@@ -71,7 +71,7 @@
                 }
             },
             /**
-             * APIMethod: createControl
+             * Method: createControl
              * 创建量算控件。
              */
             createControl:function () {
@@ -164,7 +164,7 @@
                 this.clearResult();
             },
             /**
-             * APIMethod: measureCompleted
+             * Method: measureCompleted
              * 量算完成。
              */
             measureCompleted:function (event) {
@@ -179,9 +179,20 @@
                 }
                 this.deactivate();
             },
+            /**
+             * Method: clearResult
+             * 清除结果区。
+             */
             clearResult:function(){
                 if(this.resultDiv)this.resultDiv.html("");
             },
+            /**
+             * Method: showResult
+             * 在结果区显示量算结果。
+             *
+             * Parameters:
+             * txt - {String} 显示在结果区的内容
+             */
             showResult:function(txt){
                 if(this.resultDiv)this.resultDiv.html(txt);
             },
