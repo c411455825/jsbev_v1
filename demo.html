@@ -5,8 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="demo/libs/SuperMap.Include.js"></script><!--引入SuperMap iClient For JavaScript类库-->
-	 <script src="common/js/jquery-1.8.2.js"></script>
+	<script src="common/js/jquery-1.8.2.js"></script>
     <script src="demo/js/templete1/sm_bev_main.js"></script>                    <!--引入bev入口脚本-->
+    <script src="demo/js/controls/dataGrid.js"></script>
     <script>
         var map, layer0,panZoomBar,myWidgetControl,myMenuPanel,myMeasure,myNavigation;
         function init() {
@@ -29,6 +30,16 @@
                 layer0 = new SuperMap.Layer.CloudLayer();
                 map.addLayer(layer0);
                 map.setCenter(new SuperMap.LonLat(0 , 0) , 2);
+
+                var data = [
+                     ["姓名","年龄","性别","成绩"],  //标题
+                     ["小王","16","男","87"],        //数据
+                     ["小李","17","男","89"]
+                ];
+                var myDataGrid = new DataGrid({
+                     "body":document.getElementById("testDataGrid"),
+                     "data":data
+                });
             });
         }
         function initDemo(){
@@ -81,6 +92,7 @@
             <span id="toolbar" class="head_child"></span>
         </div>
         <div id="widgetControl"></div>
+        <div id="testDataGrid" style="position:absolute;top:10px;left:10px;background: #fff;z-index: 999;"></div>
 <!--[if IE 7]></div><![endif]-->
 </body>
 </html>
