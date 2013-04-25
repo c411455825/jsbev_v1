@@ -4,12 +4,10 @@
 	<title>supermap</title> 
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="demo/css/demo_table_jui.css" />
     <script src="demo/libs/SuperMap.Include.js"></script><!--引入SuperMap iClient For JavaScript类库-->
 	<script src="common/js/jquery-1.8.2.js"></script>
     <script src="demo/js/templete1/sm_bev_main.js"></script>                    <!--引入bev入口脚本-->
-    <link rel="stylesheet" type="text/css" href="demo/css/dataGrid.css"/>
-    <script src="demo/js/controls/dataGrid.js"></script>
-    <script src="demo/js/controls/paginationLinks.js"></script>
     <style>
         .DG_TABLE{
             height: 200px;
@@ -24,7 +22,7 @@
                 //页面代码需要放入其回调函数中
 
                 //设置主题
-                SuperMap.Bev.Theme.set("dot-luv");
+                SuperMap.Bev.Theme.set("cupertino");
                 //创建框架中的一些元素，如菜单
                 initDemo();
 
@@ -40,16 +38,17 @@
                 map.setCenter(new SuperMap.LonLat(0 , 0) , 2);
 
                 var data = [
-                     ["姓名","年龄","性别","成绩"],  //标题
                      ["小王","16","男","87"],        //数据
                      ["小李","17","男","89"]
                 ];
                 for(var i=0;i<100;i++){
                     data.push(["小李"+i,"17","男",Math.round(Math.random()*100)+""]);
                 }
-                var myDataGrid = new DataGrid({
+                var colTitle = ["姓名","年龄","性别","成绩"];
+                var myDataGrid = new SuperMap.Bev.DataTable({
                      "body":document.getElementById("testDataGrid"),
-                     "data":data
+                     "data":data,
+                    "columnTitles":colTitle
                 });
             });
         }
