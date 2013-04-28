@@ -1,6 +1,35 @@
 ﻿/**
  * Class: SuperMap.Bev.DataTable
  * 表格控件。
+ *
+ * Examples:
+ * (code)
+ * SuperMap.Bev.Main.loadClass("SuperMap.Bev.DataTable","demo/js/controls/sm_dataTable.js",function(){
+ *     var myDataGrid = new SuperMap.Bev.DataTable({
+ *         "body":document.getElementById("div"),
+ *         "data":[
+ *             ["小王","16","男","87"],        //数据
+ *             ["小李","17","男","89"]
+ *         ],
+ *         "columnTitles":["姓名","年龄","性别","成绩"],
+ *         "click":function(info){
+ *              //your code
+ *         },
+ *         "onrefresh":function(datas){
+ *             //your code
+ *         },
+ *         "mouseover":function(info){
+ *             //your code
+ *         },
+ *         "mouseout":function(info){
+ *             //your code
+ *         }
+ *     });
+ *     myDataGrid.setHighlight(2);
+ *     var data1 = myDataGrid.getDataOfCurPage();
+ *     var data2 = myDataGrid.getAllData();
+ * });
+ * (end)
  */
 (function () {
     SuperMap.Bev.Class.create(
@@ -21,11 +50,7 @@
              * {Array<String>} 每一列的标题
              */
             columnTitles:null,
-            /**
-             * APIProperty: table
-             * {HTMLElement} 表格对象
-             */
-            table:null,
+
             /**
              * APIProperty: mouseover
              * {Function} mouseover事件
@@ -42,6 +67,36 @@
              */
             click:null,
             /**
+             * APIProperty: onrefresh
+             * {Function} 表格刷新事件，当翻页或是其他操作导致表格刷新时，会触发该事件，并返回当前显示的数据
+             */
+            onrefresh:null,
+            /**
+             * APIProperty: isDisplayMenu
+             * {Boolean}  是否显示左上角的菜单
+             */
+            isDisplayMenu:true,
+            /**
+             * APIProperty: isDisplaySearch
+             * {Boolean}  是否显示搜索框
+             */
+            isDisplaySearch:true,
+            /**
+             * Property: isInit
+             * {Boolean} 是否已经初始化
+             */
+            isInit:false,
+            /**
+             * Property: table
+             * {HTMLElement} 表格对象
+             */
+            table:null,
+            /**
+             * Property: userColumnTitles
+             * {Array<String>} 用户设置的标题数组
+             */
+            userColumnTitles:null,
+            /**
              * Constructor: SuperMap.Bev.DataTable
              * 实例化 DataTable 类。
              *
@@ -53,11 +108,22 @@
              * (end)
              */
             init:function (options) {
+                var me = this;
                 for(var key in options){
                     this[key] = options[key];
                 }
 
-                this.create();
+                LazyLoad.css("demo/css/demo_table_jui.css", function(){}, 'demo_table_jui.css has been loaded');
+                me.create();
+                window.setTimeout(function(){
+                    me.isInit = true;
+                    if(!me.isDisplayMenu){
+                        $(me.body).find(".dataTables_length").css({"display":"none"});
+                    }
+                    if(!me.isDisplaySearch){
+                        $(me.body).find(".dataTables_filter").css({"display":"none"});
+                    }
+                },100);
             },
             /**
              * APIMethod: setHighlight
@@ -69,7 +135,7 @@
             setHighlight:function(id){
                 var me=this,tb = this.table,tds,td,tr,trs;
 
-                trs = tb.$("tr");
+                trs = tb.find("tr");
                 for(var i=0;i<trs.length;i++){
                     tr = $(trs[i]);
                     tds = tr.children("td");
@@ -94,6 +160,40 @@
              */
             getAllData:function(){
                 return this.getData(false);
+            },
+            /**
+             * APIMethod: clear
+             * 清空表格
+             */
+            clear:function(){
+                if(this.table)this.table.fnClearTable();
+                this.data = null;
+                if(this.userColumnTitles&&this.columnTitles)this.columnTitles = this.userColumnTitles.concat([]);
+            },
+            /**
+             * APIMethod: add
+             * 往表格中添加数据
+             *
+             * Parameters:
+             * data - {Array} 新添加的数据，可以是一维数组，也可以是二维数组
+             */
+            add:function(data){
+                var me = this;
+                if(!(data[0] instanceof Array)){
+                    data = [data];
+                }
+                if(me.data){
+                    me.data = me.data.concat(data);
+                }
+                else{
+                    me.data = data;
+                }
+                me.setDataId();
+
+                if(me.table){
+                    me.table.fnAddData(data);
+                    me.registerEvernt();
+                }
             },
             /**
              * Method: getData
@@ -127,6 +227,7 @@
                 var me=this,tb,colParam,cts;
 
                 colParam = [];
+                me.userColumnTitles = me.columnTitles.concat([]);
                 cts = me.columnTitles;
                 me.setDataId();
                 for(var i=0;i<cts.length;i++){
@@ -137,31 +238,45 @@
                 }
                 me.table = tb = $("<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" class=\"display\"></table>");
                 tb.appendTo(me.body);
+                $(me.body).css({
+                    "font-size":"13px",
+                    "font-family":"none"
+                });
                 tb.dataTable({
                     "bJQueryUI":true,
                     "sPaginationType": "full_numbers",
                     "aaData":me.data,
-                    "aoColumns":colParam
+                    "aoColumns":colParam,
+                    "oLanguage": {
+                        "sLengthMenu": "每页显示 _MENU_ 条",
+                        //"sZeroRecords": "Nothing found - sorry",
+                        "sInfo": "从 _START_ 到 _END_ 共 _TOTAL_ 条",
+                        "sInfoEmpty": "从 0 到 0 共 0 条",
+                        //"sInfoFiltered": "(filtered from _MAX_ total records)",
+                        "sSearch":"搜索:",
+                        "oPaginate": {
+                           "sFirst": "首页",
+                            "sLast":"末页",
+                            "sPrevious":"上一页",
+                            "sNext":"下一页"
+                        }
+                    },
+                    "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                        if(me.onrefresh&&me.isInit){
+//                            var data=[];
+//                            if(aaData&&aaData.length>0){
+//                                data = aaData.slice(iStart,iEnd);
+//                                me.onrefresh(data);
+//                            }
+                            window.setTimeout(function(){
+                                var data = me.getDataOfCurPage();
+                                me.onrefresh(data);
+                            },30)
+                        }
+                    }
                 });
 
-                tb.$("tr").hover(
-                    function(){
-                        $(this).children("td").addClass('highlighted');
-                        $(this).css({
-                            "cursor":"pointer"
-                        });
-                        if(me.mouseover)me.mouseover(me.getInformation($(this)));
-                    },
-                    function(){
-                        if(!$(this).hasClass("tb_click")){
-                            $(this).children("td.highlighted").removeClass('highlighted');
-                        }
-                        if(me.mouseout)me.mouseout(me.getInformation($(this)));
-                    }
-                ).click(function(){
-                    me.highlight($(this));
-                    if(me.click)me.click(me.getInformation($(this)));
-                });
+                me.registerEvernt();
             },
             /**
              * Method: highlight
@@ -237,6 +352,31 @@
                 else{
                     return false;
                 }
+            },
+            /**
+             * Method: registerEvernt
+             * 注册事件
+             */
+            registerEvernt:function(){
+                var tb = this.table,me = this;
+                tb.$("tr").hover(
+                    function(){
+                        $(this).children("td").addClass('highlighted');
+                        $(this).css({
+                            "cursor":"pointer"
+                        });
+                        if(me.mouseover)me.mouseover(me.getInformation($(this)));
+                    },
+                    function(){
+                        if(!$(this).hasClass("tb_click")){
+                            $(this).children("td.highlighted").removeClass('highlighted');
+                        }
+                        if(me.mouseout)me.mouseout(me.getInformation($(this)));
+                    }
+                ).click(function(){
+                    me.highlight($(this));
+                    if(me.click)me.click(me.getInformation($(this)));
+                });
             }
         },
         null,                        //父类

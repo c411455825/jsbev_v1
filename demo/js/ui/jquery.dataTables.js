@@ -2741,7 +2741,7 @@
 			
 			/* This can be overruled by not using the _MENU_ var/macro in the language variable */
 			var sName = 'name="'+oSettings.sTableId+'_length"';
-			var sStdMenu = '<select size="1" '+sName+'>';
+			var sStdMenu = '<select size="1" '+sName+' style="vertical-align:top;height:18px;line-height:18px;font-size:12px;padding:0px;">';
 			var i, iLen;
 			var aLengthMenu = oSettings.aLengthMenu;
 			
@@ -2750,14 +2750,14 @@
 			{
 				for ( i=0, iLen=aLengthMenu[0].length ; i<iLen ; i++ )
 				{
-					sStdMenu += '<option value="'+aLengthMenu[0][i]+'">'+aLengthMenu[1][i]+'</option>';
+					sStdMenu += '<option style="padding:0px;margin:0px;border:0px solid;" value="'+aLengthMenu[0][i]+'">'+aLengthMenu[1][i]+'</option>';
 				}
 			}
 			else
 			{
 				for ( i=0, iLen=aLengthMenu.length ; i<iLen ; i++ )
 				{
-					sStdMenu += '<option value="'+aLengthMenu[i]+'">'+aLengthMenu[i]+'</option>';
+					sStdMenu += '<option style="padding:0px;margin:0px;border:0px solid;" value="'+aLengthMenu[i]+'">'+aLengthMenu[i]+'</option>';
 				}
 			}
 			sStdMenu += '</select>';
@@ -2767,6 +2767,7 @@
 			{
 				nLength.id = oSettings.sTableId+'_length';
 			}
+			nLength.style.fontSize="16px";
 			nLength.className = oSettings.oClasses.sLength;
 			nLength.innerHTML = '<label>'+oSettings.oLanguage.sLengthMenu.replace( '_MENU_', sStdMenu )+'</label>';
 			
