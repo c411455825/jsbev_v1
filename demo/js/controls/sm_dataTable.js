@@ -82,6 +82,21 @@
              */
             isDisplaySearch:true,
             /**
+             * APIProperty: isSimplePagination
+             * {Boolean}  表格底部页码是否显示简版，简版只有“上一页”和“下一页”两个按钮
+             */
+            isSimplePagination:false,
+            /**
+             * APIProperty: isDisplayPagination
+             * {Boolean}  是否显示右下角的页码
+             */
+            isDisplayPagination:true,
+            /**
+             * APIProperty: isDisplayTableInfo
+             * {Boolean}  是否显示左下角表格信息
+             */
+            isDisplayTableInfo:true,
+            /**
              * Property: isInit
              * {Boolean} 是否已经初始化
              */
@@ -122,6 +137,12 @@
                     }
                     if(!me.isDisplaySearch){
                         $(me.body).find(".dataTables_filter").css({"display":"none"});
+                    }
+                    if(!me.isDisplayPagination){
+                        $(me.body).find(".dataTables_paginate").css({"display":"none"});
+                    }
+                    if(!me.isDisplayTableInfo){
+                        $(me.body).find(".dataTables_info").css({"display":"none"});
                     }
                 },100);
             },
@@ -178,17 +199,27 @@
              * data - {Array} 新添加的数据，可以是一维数组，也可以是二维数组
              */
             add:function(data){
-                var me = this;
+                var me = this,vl;
                 if(!(data[0] instanceof Array)){
                     data = [data];
                 }
+//                if(me.data){
+//                    me.data = me.data.concat(data);
+//                }
+//                else{
+//                    me.data = data;
+//                }
+                var startIndex = 0;
                 if(me.data){
-                    me.data = me.data.concat(data);
+                    startIndex = me.data.length;
+                }
+                vl = me.setDataId(me.userColumnTitles.concat([]),data,startIndex);
+                if(me.data){
+                    me.data = me.data.concat(vl[1]);
                 }
                 else{
-                    me.data = data;
+                    me.data = vl[1];
                 }
-                me.setDataId();
 
                 if(me.table){
                     me.table.fnAddData(data);
@@ -224,12 +255,13 @@
              * 创建该控件的dom对象。
              */
             create:function(){
-                var me=this,tb,colParam,cts;
+                var me=this,tb,colParam,cts,vl;
 
                 colParam = [];
                 me.userColumnTitles = me.columnTitles.concat([]);
-                cts = me.columnTitles;
-                me.setDataId();
+                vl = me.setDataId(me.columnTitles,me.data);
+                cts = me.columnTitles = vl[0];
+                me.data = vl[1];
                 for(var i=0;i<cts.length;i++){
                     colParam.push({
                         "sTitle":cts[i],
@@ -244,7 +276,7 @@
                 });
                 tb.dataTable({
                     "bJQueryUI":true,
-                    "sPaginationType": "full_numbers",
+                    "sPaginationType": me.isSimplePagination?"two_button":"full_numbers",
                     "aaData":me.data,
                     "aoColumns":colParam,
                     "oLanguage": {
@@ -312,31 +344,34 @@
              * Method: setDataId
              * 设置data上的id信息。
              */
-            setDataId:function(){
+            setDataId:function(columnTitles,data,startIndex){
                 var me = this,idIndex=null,t1;
-                if(me.columnTitles&&me.data){
-                    for(var i=0;i<me.columnTitles.length;i++){
-                        if(me.isId(me.columnTitles[i])){
+                if(columnTitles&&data){
+                    for(var i=0;i<columnTitles.length;i++){
+                        if(me.isId(columnTitles[i])){
                             idIndex = i;
                         }
                     }
-                    for(var i=0;i<me.data.length;i++){
-                        t1 = me.data[i];
+                    if(!startIndex)startIndex=0;
+                    for(var i=0;i<data.length;i++){
+                        t1 = data[i];
 
                         if(idIndex==null){
-                            me.data[i].unshift(i+1);
+                            data[i].unshift(i+1+startIndex);
                         }
                         else{
                             var id = t1.splice(idIndex,1);
                             t1.unshift(id);
-                            me.data[i] = t1;
+                            data[i] = t1;
                         }
                     }
                     if(idIndex==null){
-                        me.columnTitles.unshift("SMID");
+                        columnTitles.unshift("SMID");
                         idIndex = 0;
                     }
                 }
+
+                return [columnTitles,data];
             },
             /**
              * Method: isId

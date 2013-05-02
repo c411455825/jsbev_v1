@@ -5,23 +5,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="demo/libs/SuperMap.Include.js"></script><!--引入SuperMap iClient For JavaScript类库-->
-	<script src="common/js/jquery-1.8.2.js"></script>
+	 <script src="common/js/jquery-1.8.2.js"></script>
     <script src="demo/js/templete1/sm_bev_main.js"></script>                    <!--引入bev入口脚本-->
-    <style>
-        .DG_TABLE{
-            height: 200px;
-            width: 300px;
-        }
-    </style>
     <script>
-        var map, layer0,panZoomBar,myWidgetControl,myMenuPanel,myMeasure,myNavigation,myDataGrid;
+        var map, layer0,panZoomBar,myWidgetControl,myMenuPanel,myMeasure,myNavigation;
         function init() {
             //初始化bev框架，
             SuperMap.Bev.Main.init(function(){
                 //页面代码需要放入其回调函数中
 
                 //设置主题
-                SuperMap.Bev.Theme.set("cupertino");
+                SuperMap.Bev.Theme.set("dot-luv");
                 //创建框架中的一些元素，如菜单
                 initDemo();
 
@@ -35,85 +29,6 @@
                 layer0 = new SuperMap.Layer.CloudLayer();
                 map.addLayer(layer0);
                 map.setCenter(new SuperMap.LonLat(0 , 0) , 2);
-
-//                SuperMap.Bev.Main.loadClass("SuperMap.Bev.DataTable","demo/js/controls/sm_dataTable.js",function(){
-//                    var data = [
-//                        ["小王","16","男","87"],        //数据
-//                        ["小李","17","男","89"]
-//                    ];
-//                    for(var i=0;i<100;i++){
-//                        data.push(["小李"+i,"17","男",Math.round(Math.random()*100)+""]);
-//                    }
-//                    var colTitle = ["姓名","年龄","性别","成绩"];
-//                    var myDataGrid = new SuperMap.Bev.DataTable({
-//                        "body":document.getElementById("testDataGrid"),
-//                        "data":data,
-//                        "columnTitles":colTitle,
-//                        "isDisplayMenu":true,
-//                        "isDisplaySearch":true,
-//                        "click":function(info){
-//                            var infoStr = info.join("_");
-//                            log.print("click "+infoStr);
-//                        },
-//                        "onrefresh":function(datas){
-//                            for(var i=0;i<datas.length;i++){
-//                                var infoStr = datas[i].join("_");
-//                                log.print(infoStr);
-//                            }
-//                        },
-//                        "mouseover":function(info){
-//                            var infoStr = info.join("_");
-//                            log.print("mouseover "+infoStr);
-//                        },
-//                        "mouseout":function(info){
-//                            var infoStr = info.join("_");
-//                            log.print("mouseout "+infoStr);
-//                        }
-//                    });
-//
-//
-//                    window.setTimeout(function(){
-//                        myDataGrid.setHighlight(2);
-//                    },3000)
-//
-//                    $("#testbtn").click(function(){
-//                        var data1 = myDataGrid.getDataOfCurPage();
-//                        var data2 = myDataGrid.getAllData();
-//                    });
-//                });
-                SuperMap.Bev.Main.loadClass("SuperMap.Bev.DataTable","demo/js/controls/sm_dataTable.js",function(){
-                     myDataGrid = new SuperMap.Bev.DataTable({
-                         "body":document.getElementById("testDataGrid"),
-                         "data":[
-                             ["小王","16","男","87"],        //数据
-                             ["小李","17","男","89"]
-                         ],
-                         "columnTitles":["姓名","年龄","性别","成绩"],
-                         "click":function(info){
-                              //your code
-                         },
-                         "onrefresh":function(datas){
-                             //your code
-                         },
-                         "mouseover":function(info){
-                             //your code
-                         },
-                         "mouseout":function(info){
-                             //your code
-                         }
-                     });
-                     myDataGrid.setHighlight(2);
-                     var data1 = myDataGrid.getDataOfCurPage();
-                     var data2 = myDataGrid.getAllData();
-                });
-
-                $("#testbtn").click(function(){
-                    myDataGrid.clear();
-                    myDataGrid.add([
-                        ["小王","16fefe","男","87"],        //数据
-                        ["小李","17fefe","男","89"]
-                    ]);
-                });
             });
         }
         function initDemo(){
@@ -121,7 +36,7 @@
             myWidgetControl = new SuperMap.Bev.WidgetControl("#widgetControl");
             //创建菜单按钮栏，当鼠标移到这些按钮上时，会显示菜单或其他操作面板
             myMenuPanel = new SuperMap.Bev.MenuPanel($("#toolbar"),{
-                "tree":[
+                "tree":[ 
                     {
                         "icon":"measure_icon",
                         "title":"基本操作",
@@ -159,7 +74,6 @@
     </script>
 </head>
 <body onload="init()">
-    <input id="testbtn" style="position: absolute;right:10px;top:10px;z-index: 9999;width: 40px;" value="testbtn" type="button"/>
 <!--[if IE 7]><div style="position: absolute;width: 100%;height: 100%;overflow: hidden;"><![endif]-->
         <div id="mapContainer"></div><!--地图区域-->
         <div id="head" class="background_1"><!--标题栏-->
@@ -167,8 +81,6 @@
             <span id="toolbar" class="head_child"></span>
         </div>
         <div id="widgetControl"></div>
-        <div id="testDataGrid" style="position:absolute;top:10px;left:10px;background: #fff;z-index: 999;width: 800px;"></div>
 <!--[if IE 7]></div><![endif]-->
 </body>
-<script src="log.js"></script>
 </html>

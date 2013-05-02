@@ -22,37 +22,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="demo.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="demo.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="48" selection-start="4701" selection-end="4701" vertical-scroll-proportion="-10.714286">
+            <state line="95" column="62" selection-start="4325" selection-end="4325" vertical-scroll-proportion="0.6744548">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sm_dataTable.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="sm_dataTable.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/js/controls/sm_dataTable.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="30" selection-start="5305" selection-end="5305" vertical-scroll-proportion="0.6105417">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="demo_table_jui.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/demo/css/demo_table_jui.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="28" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="themes.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/temp/test/themes.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="31" selection-start="3196" selection-end="3196" vertical-scroll-proportion="0.0">
+            <state line="134" column="42" selection-start="3850" selection-end="3850" vertical-scroll-proportion="-82.78571">
               <folding />
             </state>
           </provider>
@@ -78,8 +60,8 @@
         <option value="$PROJECT_DIR$/demo/css/demo_table_jui.css" />
         <option value="$PROJECT_DIR$/demo/uithemes/demos.css" />
         <option value="$PROJECT_DIR$/demo/js/templete1/sm_bev_main.js" />
-        <option value="$PROJECT_DIR$/demo.html" />
         <option value="$PROJECT_DIR$/demo/js/controls/sm_dataTable.js" />
+        <option value="$PROJECT_DIR$/demo.html" />
       </list>
     </option>
   </component>
@@ -115,16 +97,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -199,14 +171,24 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="project.propVCSSupport.VCSs.Git" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -216,7 +198,7 @@
   <component name="RunManager">
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
       <JSDebuggerConfigurationSettings>
-        <option name="engineId" />
+        <option name="engineId" value="embedded" />
         <option name="fileUrl" />
       </JSDebuggerConfigurationSettings>
       <method />
@@ -261,7 +243,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19064748" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15899281" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16115108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -357,44 +339,38 @@
         <state line="20" column="45" selection-start="471" selection-end="501" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/temp/test/themes.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="31" selection-start="3196" selection-end="3196" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/uithemes/demos.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="19" column="0" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/js/templete1/sm_bev_main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="245" column="27" selection-start="8927" selection-end="8927" vertical-scroll-proportion="6.947761">
-          <folding />
-        </state>
+        <state line="245" column="27" selection-start="8927" selection-end="8927" vertical-scroll-proportion="6.947761" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/css/demo_table_jui.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="28" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="8" column="28" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo.html">
+    <entry file="file://$PROJECT_DIR$/temp/test/themes.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="48" selection-start="4701" selection-end="4701" vertical-scroll-proportion="-10.714286">
+        <state line="63" column="31" selection-start="3196" selection-end="3196" vertical-scroll-proportion="0.18778627">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/js/controls/sm_dataTable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="30" selection-start="5305" selection-end="5305" vertical-scroll-proportion="0.6105417">
+        <state line="134" column="42" selection-start="3850" selection-end="3850" vertical-scroll-proportion="-82.78571">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="62" selection-start="4325" selection-end="4325" vertical-scroll-proportion="0.6744548">
           <folding />
         </state>
       </provider>
